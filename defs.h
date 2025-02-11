@@ -7,7 +7,7 @@
 #define NUM_HINTS 8
 #define RAINBOW_MODE false
 
-enum COLOR {RED, BLUE, YELLOW, GREEN, WHITE, RAINBOW};
+enum COLOR {RED = 0, BLUE = 1, YELLOW = 2, GREEN = 3, WHITE = 4, RAINBOW = 5};
 
 typedef struct {
     enum COLOR color;
@@ -26,7 +26,7 @@ typedef struct {
 
 typedef struct {
     PLAYER players[NUM_PLAYERS];
-    DECK deck;
+    DECK *deck;
     int num_hints;
     int num_fuses;
 } BOARD;
@@ -36,5 +36,8 @@ typedef struct {
 extern void printBoard(const BOARD *board);
 //player.c
 extern void printHand(const PLAYER *player);
+//deck.c
 extern void printCard(const CARD *card);
+extern void printDeck(const DECK *deck);
+extern void initDeck(DECK *deck);
 

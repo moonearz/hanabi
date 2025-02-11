@@ -6,4 +6,6 @@ void printBoard(const BOARD *board) {
         printf("this is player %i's hand: \n", i + 1);
         printHand((board->players) + i);
     }
+    initDeck(board->deck);
+    printDeck(board->deck);
 }
