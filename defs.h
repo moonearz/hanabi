@@ -40,4 +40,5 @@ extern void printHand(const PLAYER *player);
 extern void printCard(const CARD *card);
 extern void printDeck(const DECK *deck);
 extern void initDeck(DECK *deck);
+extern void shuffleDeck(DECK *deck);
 

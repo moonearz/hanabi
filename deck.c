@@ -60,3 +60,20 @@ void initDeck(DECK *deck) {
         }
     }
 }
+
+
+void shuffleDeck(DECK *deck) //implements Fisher-Yates shuffling
+{
+    srand(142857); //seed for debuggging, remove this later
+    int i,j;
+    CARD temp;
+    for(i = 0; i < 49 + 10 * RAINBOW_MODE; i++) {
+        j = (rand() % (49 + 10 * RAINBOW_MODE - i)) + i;
+        temp.color = deck->cards[i].color;
+        temp.value = deck->cards[i].value;
+        deck->cards[i].color = deck->cards[j].color;
+        deck->cards[i].value = deck->cards[j].value;
+        deck->cards[j].color = temp.color;
+        deck->cards[j].value = temp.value;
+    }
+}

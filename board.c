@@ -7,5 +7,6 @@ void printBoard(const BOARD *board) {
         printHand((board->players) + i);
     }
     initDeck(board->deck);
+    shuffleDeck(board->deck);
     printDeck(board->deck);
 }
