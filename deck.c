@@ -1,8 +1,8 @@
 #include "defs.h"
 
-extern void printCard(const CARD *card) {
+extern void printCard(const CARD card) {
     char color;
-    switch (card->color) {
+    switch (card.color) {
         case RED:
             color = 'R';
             break;
@@ -22,14 +22,14 @@ extern void printCard(const CARD *card) {
             color = 'X';
             break;
     }
-    printf("%c%i", color, card->value);
+    printf("%c%i", color, card.value);
 }
 
 void printDeck (const DECK *deck) {
     int i, j;
     for(i = 0; i < 5 + RAINBOW_MODE; i++) {
         for(j = 0; j < 10; j++) {
-            printCard(&deck->cards[10 * i + j]);
+            printCard(deck->cards[10 * i + j]);
             printf(" ");
         }
         printf("\n");
@@ -59,15 +59,15 @@ void initDeck(DECK *deck) {
             }
         }
     }
+    deck->index = 0;
 }
-
 
 void shuffleDeck(DECK *deck) //implements Fisher-Yates shuffling
 {
     srand(142857); //seed for debuggging, remove this later
     int i,j;
     CARD temp;
-    for(i = 0; i < 49 + 10 * RAINBOW_MODE; i++) {
+    for(i = deck->index; i < 49 + 10 * RAINBOW_MODE; i++) {
         j = (rand() % (49 + 10 * RAINBOW_MODE - i)) + i;
         temp.color = deck->cards[i].color;
         temp.value = deck->cards[i].value;
@@ -76,4 +76,12 @@ void shuffleDeck(DECK *deck) //implements Fisher-Yates shuffling
         deck->cards[j].color = temp.color;
         deck->cards[j].value = temp.value;
     }
+}
+
+CARD pop(DECK *deck) {
+    CARD top;
+    top.color = deck->cards[deck->index].color;
+    top.value = deck->cards[deck->index].value;
+    (deck->index)++;
+    return top;
 }

@@ -4,13 +4,20 @@
 #include "defs.h"
 
 int main() {
+    int i;
     printf("The number of players in this game is: %i\n", NUM_PLAYERS);
     printf("Rainbow mode is %s\n", RAINBOW_MODE ? "on" : "off");
 
     BOARD myboard;
+    initDeck(myboard.deck);
+    shuffleDeck(myboard.deck);
     printBoard(&myboard);
 
-
+    printf("the first 10 cards are: ");
+    for(i = 0; i < 10; i++) {
+        printCard(pop(myboard.deck));
+        printf(" ");
+    }
 
 
     return 0;
