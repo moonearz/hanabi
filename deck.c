@@ -94,6 +94,11 @@ void deal(BOARD *board) //deal 4 cards to every player -- MOST RECENTLY DEALT CA
     for(i = 0; i < 4; i++) {
         for(j = 0; j < NUM_PLAYERS; j++) {
             board->players[j].hand[i] = pop(board->deck);
+            (board->num_cards)--;
         }
     }
+}
+
+void initDiscard(BOARD *board) {
+    
 }

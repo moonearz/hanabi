@@ -14,12 +14,6 @@ int main() {
     deal(&myboard);
     printBoard(&myboard);
 
-    /* printf("the first 10 cards are: ");
-    for(i = 0; i < 10; i++) {
-        printCard(pop(myboard.deck));
-        printf(" ");
-    } */
-
 
     return 0;
 }
