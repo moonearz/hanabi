@@ -42,4 +42,5 @@ extern void printDeck(const DECK *deck);
 extern void initDeck(DECK *deck);
 extern void shuffleDeck(DECK *deck);
 extern CARD pop(DECK *deck); 
+void deal(BOARD *board);
 

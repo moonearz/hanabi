@@ -29,8 +29,10 @@ void printDeck (const DECK *deck) {
     int i, j;
     for(i = 0; i < 5 + RAINBOW_MODE; i++) {
         for(j = 0; j < 10; j++) {
-            printCard(deck->cards[10 * i + j]);
-            printf(" ");
+            if(10 * i + j >= (deck->index)) {
+                printCard(deck->cards[10 * i + j]);
+                printf(" ");
+            }
         }
         printf("\n");
     }
@@ -84,4 +86,14 @@ CARD pop(DECK *deck) {
     top.value = deck->cards[deck->index].value;
     (deck->index)++;
     return top;
+}
+
+void deal(BOARD *board) //deal 4 cards to every player -- MOST RECENTLY DEALT CARD GOES TO INDEX 3
+{
+    int i,j;
+    for(i = 0; i < 4; i++) {
+        for(j = 0; j < NUM_PLAYERS; j++) {
+            board->players[j].hand[i] = pop(board->deck);
+        }
+    }
 }
