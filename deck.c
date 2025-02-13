@@ -40,7 +40,7 @@ void printDeck (const DECK *deck) {
 
 void initDeck(DECK *deck) {
     int i,j;
-    for(i = 0; i < 5 + RAINBOW_MODE; i++) {
+    for(i = 0; i < 10 + RAINBOW_MODE; i++) {
         enum COLOR current = i;
         for(j = 0; j < 10; j++) {
             deck->cards[10 * i + j].color = current;
@@ -100,5 +100,10 @@ void deal(BOARD *board) //deal 4 cards to every player -- MOST RECENTLY DEALT CA
 }
 
 void initDiscard(BOARD *board) {
-    
+    int i;
+    board->discard_pile->index = 0;
+    for(i = 0; i < 50 + 10 * RAINBOW_MODE; i++) {
+        board->discard_pile->cards[i].color = NO_CARD;
+        board->discard_pile->cards[i].value = -1;
+    }
 }

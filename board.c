@@ -15,6 +15,7 @@ void initBoard(BOARD *board) {
     board->move_counter = 0;
     board->num_cards = 50 + 10 * RAINBOW_MODE;
     initDeck(board->deck);
+    initDiscard(board);
     shuffleDeck(board->deck);
     deal(board);
 }

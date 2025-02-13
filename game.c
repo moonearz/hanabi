@@ -5,13 +5,13 @@
 
 int main() {
     int i;
-    printf("The number of players in this game is: %i\n", NUM_PLAYERS);
-    printf("Rainbow mode is %s\n", RAINBOW_MODE ? "on" : "off");
+    /* printf("The number of players in this game is: %i\n", NUM_PLAYERS);
+    printf("Rainbow mode is %s\n", RAINBOW_MODE ? "on" : "off"); */
 
     BOARD myboard;
-    initDeck(myboard.deck);
-    shuffleDeck(myboard.deck);
-    deal(&myboard);
+    myboard.deck = malloc(sizeof (DECK));
+    myboard.discard_pile = malloc(sizeof (DECK));
+    initBoard(&myboard);
     printBoard(&myboard);
 
 

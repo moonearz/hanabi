@@ -37,12 +37,14 @@ typedef struct {
 /* FUNCTIONS */
 //board.c
 extern void printBoard(const BOARD *board);
+extern void initBoard(BOARD *board);
 //player.c
 extern void printHand(const PLAYER *player);
 //deck.c
 extern void printCard(const CARD card);
 extern void printDeck(const DECK *deck);
 extern void initDeck(DECK *deck);
+extern void initDiscard(BOARD *board);
 extern void shuffleDeck(DECK *deck);
 extern CARD pop(DECK *deck); 
 void deal(BOARD *board);
