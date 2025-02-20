@@ -26,8 +26,9 @@ typedef struct {
 
 typedef struct {
     PLAYER players[NUM_PLAYERS];
-    DECK *deck;
-    DECK *discard_pile;
+    DECK deck;
+    DECK discard_pile;
+    bool fireworks[5 + RAINBOW_MODE][5];
     int num_hints;
     int num_fuses;
     int move_counter;
@@ -38,6 +39,7 @@ typedef struct {
 //board.c
 extern void printBoard(const BOARD *board);
 extern void initBoard(BOARD *board);
+extern int getScore(BOARD *board);
 //player.c
 extern void printHand(const PLAYER *player);
 //deck.c
@@ -47,5 +49,6 @@ extern void initDeck(DECK *deck);
 extern void initDiscard(BOARD *board);
 extern void shuffleDeck(DECK *deck);
 extern CARD pop(DECK *deck); 
-void deal(BOARD *board);
+extern void deal(BOARD *board);
+extern void initFireworks(bool fireworks[][5]);
 

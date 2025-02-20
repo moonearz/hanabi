@@ -93,7 +93,7 @@ void deal(BOARD *board) //deal 4 cards to every player -- MOST RECENTLY DEALT CA
     int i,j;
     for(i = 0; i < 4; i++) {
         for(j = 0; j < NUM_PLAYERS; j++) {
-            board->players[j].hand[i] = pop(board->deck);
+            board->players[j].hand[i] = pop(&board->deck);
             (board->num_cards)--;
         }
     }
@@ -101,9 +101,18 @@ void deal(BOARD *board) //deal 4 cards to every player -- MOST RECENTLY DEALT CA
 
 void initDiscard(BOARD *board) {
     int i;
-    board->discard_pile->index = 0;
+    board->discard_pile.index = 0;
     for(i = 0; i < 50 + 10 * RAINBOW_MODE; i++) {
-        board->discard_pile->cards[i].color = NO_CARD;
-        board->discard_pile->cards[i].value = -1;
+        board->discard_pile.cards[i].color = NO_CARD;
+        board->discard_pile.cards[i].value = -1;
+    }
+}
+
+void initFireworks(bool fireworks[][5]) {
+    int i,j;
+    for(i = 0; i < 5 + RAINBOW_MODE; i++) {
+        for(j = 0; j < 5; j++) {
+            fireworks[i][j] = false;
+        }
     }
 }

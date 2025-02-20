@@ -9,10 +9,9 @@ int main() {
     printf("Rainbow mode is %s\n", RAINBOW_MODE ? "on" : "off"); */
 
     BOARD myboard;
-    myboard.deck = malloc(sizeof (DECK));
-    myboard.discard_pile = malloc(sizeof (DECK));
     initBoard(&myboard);
     printBoard(&myboard);
+    printf("the current score is: %i\n", getScore(&myboard));
 
 
     return 0;
