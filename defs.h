@@ -2,6 +2,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
+#define DEBUG
+
+#ifndef DEBUG
+#define ASSERT(n)
+#else
+#define ASSERT(n) \
+if(!(n)) {\
+printf("%s - Failed", #n); \
+printf("On %s ",__DATE__); \
+printf("At %s ",__TIME__); \
+printf("In File %s ",__FILE__); \
+printf("At Line %d\n ",__LINE__); \
+exit(1);}
+#endif
+
 #define NUM_PLAYERS 4
 #define NUM_FUSES 3
 #define NUM_HINTS 8
@@ -42,6 +58,9 @@ extern void initBoard(BOARD *board);
 extern int getScore(BOARD *board);
 //player.c
 extern void printHand(const PLAYER *player);
+extern void discardCard(BOARD *board, PLAYER *player, int index);
+extern void shiftHand(PLAYER *player, int index);
+extern void drawCard(PLAYER *player, DECK *deck);
 //deck.c
 extern void printDeck(const DECK *deck);
 extern void initDeck(DECK *deck);

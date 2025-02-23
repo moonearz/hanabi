@@ -8,3 +8,15 @@ void printHand(const PLAYER *player) {
     }
     printf("\n");
 }
+
+void discardCard(BOARD *board, PLAYER *player, int index) {
+
+}
+
+void shiftHand(PLAYER *player, int index) {
+
+}
+
+void drawCard(PLAYER *player, DECK *deck) {
+
+}
