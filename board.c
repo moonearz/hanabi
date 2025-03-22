@@ -32,3 +32,9 @@ int getScore(BOARD *board) {
     return score;
 }
 
+//shifting is taken care of from the player side
+//this function should only reduce the possibilites based on new information
+//should not reset the knowledge arrays
+void fillKnowledge(BOARD *board) {
+
+}
