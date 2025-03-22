@@ -6,7 +6,11 @@ void printBoard(const BOARD *board) {
         printf("this is player %i's hand: \n", i + 1);
         printHand((board->players) + i);
     }
-    printDeck(&board->deck);
+    //printDeck(&board->deck);
+}
+
+void printFullGameState(const BOARD *board) {
+
 }
 
 void initBoard(BOARD *board) {
@@ -14,11 +18,20 @@ void initBoard(BOARD *board) {
     board->num_fuses = NUM_FUSES;
     board->move_counter = 0;
     board->num_cards = 50 + 10 * RAINBOW_MODE;
+    initPlayers(board);
     initDeck(&board->deck);
     initDiscard(board);
     initFireworks(board->fireworks);
     shuffleDeck(&board->deck);
     deal(board);
+}
+
+void initPlayers(BOARD *board) {
+    int i,j;
+    for(i = 0; i < NUM_PLAYERS; i++) {
+        board->players[i].id = i + 1;
+        initKnowledge(&board->players[i]);
+    }
 }
 
 int getScore(BOARD *board) {

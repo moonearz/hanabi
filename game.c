@@ -29,6 +29,8 @@ int main() {
         printf(" is %s\n", playableCard(testCards[i], myboard.fireworks) ? "playable" : "not playable");
     }
 
+    printKnowledge(&myboard.players[1]);
+
 
     return 0;
 }
