@@ -37,7 +37,7 @@ typedef struct {
 
 typedef struct {
     CARD hand[4];
-    int knowledge[5 + RAINBOW_MODE][5]; //represents knowledge the player has about their own hand
+    int knowledge[4][5 + RAINBOW_MODE][5]; //represents knowledge the player has about their own hand, for each card
     int id;
 } PLAYER;
 
@@ -67,6 +67,7 @@ extern void shiftHand(PLAYER *player, int index);
 extern void drawCard(PLAYER *player, DECK *deck);
 extern void printKnowledge(const PLAYER *player);
 extern void initKnowledge(PLAYER *player);
+extern void newKnowledge(PLAYER *player);
 //deck.c
 extern void printDeck(const DECK *deck);
 extern void initDeck(DECK *deck);
