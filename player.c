@@ -2,7 +2,7 @@
 
 void printHand(const PLAYER *player) {
     int i;
-    for(i = 0; i < 4; i++) {
+    for(i = 0; i < HAND_SIZE; i++) {
         printCard(player->hand[i]);
         printf(" ");
     }
@@ -12,7 +12,7 @@ void printHand(const PLAYER *player) {
 void initKnowledge(PLAYER *player) {
     int i,j,k,value;
 
-    for(i = 0; i < 4; i++) {
+    for(i = 0; i < HAND_SIZE; i++) {
         for(j = 0; j < 5 + RAINBOW_MODE; j++) {
             for(k = 0; k < 5; k++) {
                 if(k == 4) {
@@ -30,7 +30,7 @@ void initKnowledge(PLAYER *player) {
     }
 }
 
-//initializes no knowledges in index 3 for a draw
+//initializes no knowledges in index hand size - 1 for a draw
 void newKnowledge(PLAYER *player) {
     int j,k,value;
     for(j = 0; j < 5 + RAINBOW_MODE; j++) {
@@ -44,7 +44,7 @@ void newKnowledge(PLAYER *player) {
                 else {
                     value = 2;
                 }
-                player->knowledge[3][j][k] = value;
+                player->knowledge[HAND_SIZE - 1][j][k] = value;
         }
     }
 }
@@ -53,7 +53,7 @@ void printKnowledge(const PLAYER *player) {
     int i,j, k;
     char colors[6][8] = {"RED", "BLUE", "YELLOW", "GREEN", "WHITE", "RAINBOW"};
     printf("Player %i could possibly have in their hand:\n", player->id);
-    for(i = 0; i < 4; i++) {
+    for(i = 0; i < HAND_SIZE; i++) {
         printf("for card index %i:\n", i);
         printf("          1 2 3 4 5\n");
         for(j = 0; j < 5 + RAINBOW_MODE; j++) {
@@ -76,7 +76,7 @@ void discardCard(BOARD *board, PLAYER *player, int index) {
 void shiftHand(PLAYER *player, int index) {
     int i,j,k;
     //index was the card that was "removed"
-    for(i = index; i < 3; i++) {
+    for(i = index; i < HAND_SIZE - 1; i++) {
         player->hand[i] = player->hand[i + 1];
         for(j = 0; j < 5 + RAINBOW_MODE; j++) {
             for(k = 0; k < 5; k++) {
@@ -87,6 +87,6 @@ void shiftHand(PLAYER *player, int index) {
 }
 
 void drawCard(PLAYER *player, DECK *deck) {
-    player->hand[3] = pop(deck);
+    player->hand[HAND_SIZE - 1] = pop(deck);
     newKnowledge(player);
 }

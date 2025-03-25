@@ -66,7 +66,7 @@ CARD pop(DECK *deck) {
 void deal(BOARD *board) //deal 4 cards to every player -- MOST RECENTLY DEALT CARD GOES TO INDEX 3
 {
     int i,j;
-    for(i = 0; i < 4; i++) {
+    for(i = 0; i < HAND_SIZE; i++) {
         for(j = 0; j < NUM_PLAYERS; j++) {
             board->players[j].hand[i] = pop(&board->deck);
             (board->num_cards)--;

@@ -19,6 +19,7 @@ exit(1);}
 #endif
 
 #define NUM_PLAYERS 4
+#define HAND_SIZE 4 + (NUM_PLAYERS < 4)
 #define NUM_FUSES 3
 #define NUM_HINTS 8
 #define RAINBOW_MODE false
@@ -37,7 +38,7 @@ typedef struct {
 
 typedef struct {
     CARD hand[4];
-    int knowledge[4][5 + RAINBOW_MODE][5]; //represents knowledge the player has about their own hand, for each card
+    int knowledge[HAND_SIZE][5 + RAINBOW_MODE][5]; //represents knowledge the player has about their own hand, for each card
     int id;
 } PLAYER;
 
