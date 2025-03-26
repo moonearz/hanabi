@@ -25,6 +25,14 @@ exit(1);}
 #define RAINBOW_MODE false
 
 enum COLOR {RED = 0, BLUE = 1, YELLOW = 2, GREEN = 3, WHITE = 4, RAINBOW = 5, NO_CARD = 6, UNKNOWN = 7};
+enum MOVES {HINT = 1, PLAY = 2, DISCARD = 3};
+enum HINT_TYPE{COLOR = 1, NUMBER = 2, NOHINT = 3};
+
+typedef struct {
+    enum MOVES move_type;
+    int index; //index of card discarded or played, -1 for a hint?
+    enum HINT_TYPE;
+} MOVE;
 
 typedef struct {
     enum COLOR color;
@@ -81,4 +89,5 @@ extern void initFireworks(bool fireworks[][5]);
 extern void printCard(const CARD card);
 extern bool validCard(const CARD card);
 extern bool playableCard(const CARD card, const bool fireworks[][5]);
-
+//move.c
+extern bool isLegalMove(const MOVE* move);
