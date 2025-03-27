@@ -63,12 +63,12 @@ typedef struct {
 
 /* FUNCTIONS */
 //board.c
-extern void printBoard(const BOARD *board);
 extern void initBoard(BOARD *board);
 extern int getScore(BOARD *board);
-void initPlayers(BOARD *board);
+extern void initPlayers(BOARD *board);
 extern void fillKnowledge(BOARD *board);
-void printFullGameState(const BOARD *board);
+extern void printVisibleGameState(const BOARD *board);
+extern void printFullGameState(const BOARD *board);
 //player.c
 extern void printHand(const PLAYER *player);
 extern void discardCard(BOARD *board, PLAYER *player, int index);
@@ -79,12 +79,14 @@ extern void initKnowledge(PLAYER *player);
 extern void newKnowledge(PLAYER *player);
 //deck.c
 extern void printDeck(const DECK *deck);
+extern void printDiscard(const DECK *discard);
 extern void initDeck(DECK *deck);
 extern void initDiscard(BOARD *board);
 extern void shuffleDeck(DECK *deck);
 extern CARD pop(DECK *deck); 
 extern void deal(BOARD *board);
 extern void initFireworks(bool fireworks[][5]);
+extern void printFireworks(bool fireworks[][5]);
 //card.c
 extern void printCard(const CARD card);
 extern bool validCard(const CARD card);

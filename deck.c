@@ -1,6 +1,6 @@
 #include "defs.h"
 
-void printDeck (const DECK *deck) {
+void printDeck(const DECK *deck) {
     int i, j;
     for(i = 0; i < 5 + RAINBOW_MODE; i++) {
         for(j = 0; j < 10; j++) {
@@ -11,6 +11,15 @@ void printDeck (const DECK *deck) {
         }
         printf("\n");
     }
+}
+
+void printDiscard(const DECK *discard) {
+    int i;
+    for(i = 0; i < discard->index; i++) {
+        printCard(discard->cards[i]);
+        printf(" ");
+    }
+    printf("\n");
 }
 
 void initDeck(DECK *deck) {
@@ -89,5 +98,24 @@ void initFireworks(bool fireworks[][5]) {
         for(j = 0; j < 5; j++) {
             fireworks[i][j] = false;
         }
+    }
+}
+
+void printFireworks(bool fireworks[][5]) {
+    int i,j;
+    CARD tmp;
+    for(j = 4; j > -1; j--) {
+        for(i = 0; i < 5 + RAINBOW_MODE; i++) {
+            if(fireworks[i][j]) {
+                tmp.color = (enum COLOR)i;
+                tmp.value = j + 1;
+                printCard(tmp);
+                printf(" ");
+            }
+            else {
+                printf("   ");
+            }
+        }
+        printf("\n");
     }
 }

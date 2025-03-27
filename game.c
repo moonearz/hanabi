@@ -10,9 +10,8 @@ int main() {
 
     BOARD myboard;
     initBoard(&myboard);
-    printBoard(&myboard);
     printf("the current score is: %i\n", getScore(&myboard));
-
+/* 
     CARD testCards[4];
     testCards[0].color = RED;
     testCards[0].value = 1;
@@ -29,8 +28,9 @@ int main() {
         printf(" is %s\n", playableCard(testCards[i], myboard.fireworks) ? "playable" : "not playable");
     }
 
-    printKnowledge(&myboard.players[1]);
+    printKnowledge(&myboard.players[1]); */
 
+    printVisibleGameState(&myboard);
 
     return 0;
 }

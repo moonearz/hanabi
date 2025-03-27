@@ -1,12 +1,18 @@
 #include "defs.h"
 
-void printBoard(const BOARD *board) {
+//visible game state consists of players hands, discard pile, tokens, played cards = board
+void printVisibleGameState(const BOARD *board) {
+    printf("The number of hint tokens available is: %i\n", board->num_hints);
+    printf("The number of fuses left is: %i\n", board->num_fuses);
+    printf("The discard pile looks like: ");
+    printDiscard(&board->discard_pile);
     int i;
     for(i = 0; i < NUM_PLAYERS; i++) {
-        printf("this is player %i's hand: \n", i + 1);
-        printHand((board->players) + i);
+        printf("Player %i's hand is: ", i + 1);
+        printHand(&board->players[i]);
     }
-    //printDeck(&board->deck);
+    printf("The board looks like: \n");
+    printFireworks(board->fireworks);
 }
 
 void printFullGameState(const BOARD *board) {
