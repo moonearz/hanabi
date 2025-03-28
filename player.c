@@ -68,6 +68,7 @@ void printKnowledge(const PLAYER *player) {
 
 //index is index of card to discard, also draws
 void discardCard(BOARD *board, PLAYER *player, int index) {
+    pushDiscard(&board->discard_pile, player->hand[index]);
     shiftHand(player, index);
     drawCard(player, &board->deck);
 }

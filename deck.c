@@ -92,6 +92,12 @@ void initDiscard(BOARD *board) {
     }
 }
 
+void pushDiscard(DECK *discard, CARD card) {
+    discard->cards[discard->index].color = card.color;
+    discard->cards[discard->index].value = card.value;
+    (discard->index)++;
+}
+
 void initFireworks(bool fireworks[][5]) {
     int i,j;
     for(i = 0; i < 5 + RAINBOW_MODE; i++) {

@@ -15,6 +15,7 @@ void printVisibleGameState(const BOARD *board) {
     printFireworks(board->fireworks);
 }
 
+//includes deck, knowledge, move number
 void printFullGameState(const BOARD *board) {
 
 }

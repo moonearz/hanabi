@@ -82,6 +82,7 @@ extern void printDeck(const DECK *deck);
 extern void printDiscard(const DECK *discard);
 extern void initDeck(DECK *deck);
 extern void initDiscard(BOARD *board);
+extern void pushDiscard(DECK *discard, CARD card);
 extern void shuffleDeck(DECK *deck);
 extern CARD pop(DECK *deck); 
 extern void deal(BOARD *board);
