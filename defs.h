@@ -62,7 +62,7 @@ typedef struct {
     bool fireworks[5 + RAINBOW_MODE][5];
     int num_hints; //number of available hints
     int num_fuses; //number of remaining fuses
-    int move_counter;
+    int move_counter; //end of game is at move_counter + NUM_PLAYERS, approximately
     int num_cards; //number of cards in the deck
     bool game_over;
 } BOARD;
@@ -75,6 +75,7 @@ extern void initPlayers(BOARD *board);
 extern void fillKnowledge(BOARD *board);
 extern void printVisibleGameState(const BOARD *board);
 extern void printFullGameState(const BOARD *board);
+extern void printPlayerKnowledge(const BOARD *board);
 //player.c
 extern void printHand(const PLAYER *player);
 extern void printKnowledge(const PLAYER *player);

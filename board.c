@@ -17,7 +17,19 @@ void printVisibleGameState(const BOARD *board) {
 
 //includes deck, knowledge, move number
 void printFullGameState(const BOARD *board) {
+    printVisibleGameState(board);
+    printPlayerKnowledge(board);
+    printf("Here is the state of the deck: \n");
+    printDeck(&board->deck);
+    printf("The move number is now: %i\n", board->move_counter);
+}
 
+void printPlayerKnowledge(const BOARD *board) {
+    int i;
+    for(int i = 0; i < NUM_PLAYERS; i++) {
+        //printf("Player %i's knowledge matrix looks like: \n", i);
+        printKnowledge(&board->players[i]);
+    }
 }
 
 void initBoard(BOARD *board) {
