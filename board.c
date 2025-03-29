@@ -21,10 +21,11 @@ void printFullGameState(const BOARD *board) {
 }
 
 void initBoard(BOARD *board) {
-    board->num_hints = NUM_HINTS;
-    board->num_fuses = NUM_FUSES;
+    board->num_hints = MAX_HINTS;
+    board->num_fuses = MAX_FUSES;
     board->move_counter = 0;
     board->num_cards = 50 + 10 * RAINBOW_MODE;
+    board->game_over = false;
     initPlayers(board);
     initDeck(&board->deck);
     initDiscard(board);

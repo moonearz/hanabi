@@ -20,9 +20,11 @@ exit(1);}
 
 #define NUM_PLAYERS 4
 #define HAND_SIZE 4 + (NUM_PLAYERS < 4)
-#define NUM_FUSES 3
-#define NUM_HINTS 8
+#define MAX_FUSES 3
+#define MAX_HINTS 8
 #define RAINBOW_MODE false
+
+//insert card macro here? as in translate B2 to CARD(B, 2) yknow?
 
 enum COLOR {RED = 0, BLUE = 1, YELLOW = 2, GREEN = 3, WHITE = 4, RAINBOW = 5, NO_CARD = 6, UNKNOWN = 7};
 enum MOVES {HINT = 1, PLAY = 2, DISCARD = 3};
@@ -55,10 +57,11 @@ typedef struct {
     DECK deck;
     DECK discard_pile;
     bool fireworks[5 + RAINBOW_MODE][5];
-    int num_hints;
-    int num_fuses;
+    int num_hints; //number of available hints
+    int num_fuses; //number of remaining fuses
     int move_counter;
-    int num_cards;
+    int num_cards; //number of cards in the deck
+    bool game_over;
 } BOARD;
 
 /* FUNCTIONS */
@@ -71,9 +74,6 @@ extern void printVisibleGameState(const BOARD *board);
 extern void printFullGameState(const BOARD *board);
 //player.c
 extern void printHand(const PLAYER *player);
-extern void discardCard(BOARD *board, PLAYER *player, int index);
-extern void shiftHand(PLAYER *player, int index);
-extern void drawCard(PLAYER *player, DECK *deck);
 extern void printKnowledge(const PLAYER *player);
 extern void initKnowledge(PLAYER *player);
 extern void newKnowledge(PLAYER *player);
@@ -94,3 +94,7 @@ extern bool validCard(const CARD card);
 extern bool playableCard(const CARD card, const bool fireworks[][5]);
 //move.c
 extern bool isLegalMove(const MOVE* move);
+extern void discardCard(BOARD *board, PLAYER *player, int index);
+extern void shiftHand(PLAYER *player, int index);
+extern void drawCard(PLAYER *player, DECK *deck);
+extern void playCard(BOARD *board, PLAYER *player, int index);

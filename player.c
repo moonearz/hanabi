@@ -66,28 +66,4 @@ void printKnowledge(const PLAYER *player) {
     }
 }
 
-//index is index of card to discard, also draws
-void discardCard(BOARD *board, PLAYER *player, int index) {
-    pushDiscard(&board->discard_pile, player->hand[index]);
-    shiftHand(player, index);
-    drawCard(player, &board->deck);
-}
 
-//index is index of the card that was removed
-void shiftHand(PLAYER *player, int index) {
-    int i,j,k;
-    //index was the card that was "removed"
-    for(i = index; i < HAND_SIZE - 1; i++) {
-        player->hand[i] = player->hand[i + 1];
-        for(j = 0; j < 5 + RAINBOW_MODE; j++) {
-            for(k = 0; k < 5; k++) {
-                player->knowledge[i][j][k] = player->knowledge[i+1][j][k];
-            }
-        }
-    }
-}
-
-void drawCard(PLAYER *player, DECK *deck) {
-    player->hand[HAND_SIZE - 1] = pop(deck);
-    newKnowledge(player);
-}

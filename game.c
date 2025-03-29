@@ -30,10 +30,10 @@ int main() {
 
     printKnowledge(&myboard.players[1]); */
     printVisibleGameState(&myboard);
-    discardCard(&myboard, &myboard.players[1], 1);
-    discardCard(&myboard, &myboard.players[1], 1);
-    discardCard(&myboard, &myboard.players[1], 1);
-    discardCard(&myboard, &myboard.players[1], 1);
+    playCard(&myboard, &myboard.players[0], 2);
+    playCard(&myboard, &myboard.players[1], 1);
+    playCard(&myboard, &myboard.players[1], 1);
+    playCard(&myboard, &myboard.players[1], 1);
     printVisibleGameState(&myboard);
 
     return 0;

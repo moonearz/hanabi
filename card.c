@@ -34,12 +34,10 @@ bool playableCard(const CARD card, const bool fireworks[][5]) {
         return false;
     }
 
-    int i,j;
-    for(i = 0; i < 5 + RAINBOW_MODE; i++) {
-        for(j = 0; j < card.value - 1; j++) {
-            if(!fireworks[i][j]) {
-                return false;
-            }
+    int j;
+    for(j = 0; j < card.value - 1; j++) {
+        if(!fireworks[card.color][j]) {
+            return false;
         }
     }
 
