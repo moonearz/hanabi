@@ -29,6 +29,34 @@ bool validCard(const CARD card) {
     return card.color != NO_CARD && card.color != UNKNOWN && card.value < 6 && card.value > 0;
 }
 
+CARD makeCard(char color, int value) {
+    CARD c;
+    ASSERT(color == 'B' || color == 'R' || color == 'Y' || color == 'G' || color == 'W' || color == 'X');
+    ASSERT(value > 0 && value < 6);
+    switch(color) {
+        case 'R':
+            c.color = RED;
+            break;
+        case 'B':
+            c.color = BLUE;
+            break;
+        case 'G':
+            c.color = GREEN;
+            break;
+        case 'Y':
+            c.color = YELLOW;
+            break;
+        case 'W':
+            c.color = WHITE;
+            break;
+        case 'X':
+            c.color = RAINBOW;
+            break;
+    }
+    c.value = value;
+    return c;
+}
+
 bool playableCard(const CARD card, const bool fireworks[][5]) {
     if(!validCard(card)) {
         return false;

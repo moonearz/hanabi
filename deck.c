@@ -107,7 +107,7 @@ void initFireworks(bool fireworks[][5]) {
     }
 }
 
-void printFireworks(bool fireworks[][5]) {
+void printFireworks(const bool fireworks[][5]) {
     int i,j;
     CARD tmp;
     for(j = 4; j > -1; j--) {

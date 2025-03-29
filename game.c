@@ -29,6 +29,7 @@ int main() {
     }
 
     printKnowledge(&myboard.players[1]); */
+    //printCard(CARD('B',2));
     printVisibleGameState(&myboard);
     playCard(&myboard, &myboard.players[0], 2);
     playCard(&myboard, &myboard.players[1], 1);
