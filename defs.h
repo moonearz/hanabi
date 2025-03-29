@@ -25,7 +25,7 @@ exit(1);}
 #define RAINBOW_MODE false
 
 #define CARD(a, b) (makeCard)((a), (b))
-//insert card macro here? as in translate B2 to CARD(B, 2) yknow?
+#define MOVE(a, b, c, d) (createMove)((a), (b), (c), (d)) //for example MOVE('P', 1, 1, 'N') or MOVE('H', 2, 3, 'C')
 
 enum COLOR {RED = 0, BLUE = 1, YELLOW = 2, GREEN = 3, WHITE = 4, RAINBOW = 5, NO_CARD = 6, UNKNOWN = 7};
 enum MOVES {HINT = 1, PLAY = 2, DISCARD = 3};
@@ -33,7 +33,8 @@ enum HINT_TYPE{COLOR = 1, NUMBER = 2, NOHINT = 3};
 
 typedef struct {
     enum MOVES move_type;
-    int index; //index of card discarded or played, -1 for a hint?
+    int index_of_card; //index of card discarded or played, index of card hinted in case of a hint
+    int player_index; //for hints, which player is being hinted
     enum HINT_TYPE hint_type;
 } MOVE;
 
@@ -42,6 +43,7 @@ typedef struct {
     int value;
 } CARD;
 
+//index is initialized to 0
 typedef struct {
     CARD cards[50 + 10 * RAINBOW_MODE];
     int index;
@@ -100,6 +102,9 @@ extern void discardCard(BOARD *board, PLAYER *player, int index);
 extern void shiftHand(PLAYER *player, int index);
 extern void drawCard(PLAYER *player, DECK *deck);
 extern void playCard(BOARD *board, PLAYER *player, int index);
-extern bool canHint(BOARD *board);
-extern bool canDiscard(BOARD *board);
-extern MOVE generateRandomMove(BOARD *board, PLAYER *player);
+extern bool canHint(const BOARD *board);
+extern bool canDiscard(const BOARD *board);
+extern MOVE generateRandomMove(const BOARD *board, const PLAYER *player);
+extern void printMove(const MOVE move, const PLAYER *player);
+extern void printCompactMove(const MOVE move);
+extern MOVE createMove(char type, int card_index, int player_index, char hint_t);

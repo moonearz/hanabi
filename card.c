@@ -31,7 +31,7 @@ bool validCard(const CARD card) {
 
 CARD makeCard(char color, int value) {
     CARD c;
-    ASSERT(color == 'B' || color == 'R' || color == 'Y' || color == 'G' || color == 'W' || color == 'X');
+    ASSERT(color == 'B' || color == 'R' || color == 'Y' || color == 'G' || color == 'W' || color == 'X' || color == 'N');
     ASSERT(value > 0 && value < 6);
     switch(color) {
         case 'R':
@@ -52,6 +52,8 @@ CARD makeCard(char color, int value) {
         case 'X':
             c.color = RAINBOW;
             break;
+        default:
+            c.color = NO_CARD;
     }
     c.value = value;
     return c;

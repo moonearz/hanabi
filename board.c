@@ -37,7 +37,7 @@ void initBoard(BOARD *board) {
 void initPlayers(BOARD *board) {
     int i,j;
     for(i = 0; i < NUM_PLAYERS; i++) {
-        board->players[i].id = i + 1;
+        board->players[i].id = i;
         initKnowledge(&board->players[i]);
     }
 }

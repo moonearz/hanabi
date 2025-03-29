@@ -29,6 +29,12 @@ void shiftHand(PLAYER *player, int index) {
 }
 
 void drawCard(PLAYER *player, DECK *deck) {
+    if(deck->index == (50 + 10 * RAINBOW_MODE)) {
+        CARD empty = makeCard('N', 0);
+        player->hand[HAND_SIZE - 1] = empty;
+        newKnowledge(player); //is this the right choice? they know what card it is
+        return;
+    }
     player->hand[HAND_SIZE - 1] = pop(deck);
     newKnowledge(player);
 }
@@ -62,16 +68,83 @@ void giveHint(BOARD *board, int id_hinted, int card_index, bool color_hint) {
 
 }
 
-bool canHint(BOARD *board) {
+bool canHint(const BOARD *board) {
     return (board->num_hints > 0);
 }
 
-bool canDiscard(BOARD *board) {
+bool canDiscard(const BOARD *board) {
     return (board->num_hints < MAX_HINTS);
 }
 
 
 //player is the player whose turn it is
-MOVE generateRandomMove(BOARD *board, PLAYER *player) {
+MOVE generateRandomMove(const BOARD *board, const PLAYER *player) {
+    MOVE output;
+    int range = 3;
+    if(!canHint(board))
+        range--;
+    if(!canDiscard(board))
+        range--;
+    
+    int r = rand() % range;
+    switch(r) {
+        case 0:
+            output.move_type = PLAY;
+            break;
+        case 1:
+            if(!canHint(board)) {
+                output.move_type = DISCARD;
+            }
+            else {
+                output.move_type = HINT;
+            }
+            break;
+        case 2:
+            output.move_type = DISCARD;
+            break;
+    }
+    //type of move is now determined, fill in details
+    if(output.move_type == HINT) {
+        output.hint_type = (enum HINT_TYPE)(rand() % 2 + 1);
 
+        int player_index = player->id; //we need to hint someone who isn't this player
+        while(player_index == player->id) {
+            player_index = rand() % NUM_PLAYERS;
+        }
+        output.player_index = player_index;
+        int range = HAND_SIZE;
+        //there's an edge case at the end of the game where a player has fewer than three cards-- gotta check
+        /* if(&board->players[player_index].hand[HAND_SIZE - 1].color == NO_CARD)
+            range--; */
+        output.index_of_card = rand() % range;
+    }
+    else {
+        int index_choice = rand() % HAND_SIZE;
+        output.index_of_card = index_choice;
+        output.hint_type = NOHINT;
+        output.player_index = -1;
+    }
+    
+    return output;
+}
+
+MOVE createMove(char type, int card_index, int player_index, char hint_t) {
+    MOVE out;
+    return out;
+}
+
+void printMove(const MOVE move, const PLAYER *player) {
+    if(move.move_type == HINT) {
+        printf("Player %i is hinting player %i their card at index %i for %s\n", player->id + 1, move.player_index + 1, move.index_of_card, (move.hint_type == COLOR) ? "color" : "value");
+    }
+    else if(move.move_type == PLAY) {
+        printf("Player %i is playing the card at index %i in their hand\n", player->id + 1, move.index_of_card);
+    }
+    else {
+        printf("Player %i is discarding the card at index %i in their hand\n", player->id + 1, move.index_of_card);
+    }
+}
+
+void printCompactMove(const MOVE move) {
+    char out[5];
 }

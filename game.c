@@ -37,5 +37,10 @@ int main() {
     playCard(&myboard, &myboard.players[1], 1);
     printVisibleGameState(&myboard);
 
+    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
+    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
+    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
+    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
+
     return 0;
 }
