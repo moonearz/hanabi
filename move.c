@@ -149,6 +149,44 @@ void printCompactMove(const MOVE move) {
     char out[5];
 }
 
+//only internal knowledge needs to be updated, positive knowledge for hinted cards, negative knowledge for otehr cards
+//things get zeroed out kind of "unnaturally", will need to check (externally) that values don't become less than 0
 void updateKnowledgeHint(BOARD *board, PLAYER *player, MOVE hint) {
+    //starting with positive knowledge
+}
 
+void knownColor(int knowledge[][5 + RAINBOW_MODE][5], int index, enum COLOR color) {
+    int i,j;
+    for(i = 0; i < 5 + RAINBOW_MODE; i++) { //colors
+        if(i == color)
+            continue;
+        for(j = 0; j < 5; j++) { //values
+            knowledge[index][i][j] = 0;
+        }
+    }
+}
+
+void knownValue(int knowledge[][5 + RAINBOW_MODE][5], int index, int value) {
+    int i,j;
+    for(i = 0; i < 5; i++) { //values
+        if(i == (value - 1))
+            continue;
+        for(j = 0; j < 5 + RAINBOW_MODE; j++) { //colors
+            knowledge[index][j][i] = 0;
+        }
+    }
+}
+
+void knownNotColor(int knowledge[][5 + RAINBOW_MODE][5], int index, enum COLOR color) {
+    int i;
+    for(i = 0; i < 5; i++) {
+        knowledge[index][color][i] = 0;
+    }
+}
+
+void knownNotValue(int knowledge[][5 + RAINBOW_MODE][5], int index, int value) {
+    int i;
+    for(i = 0; i < 5 + RAINBOW_MODE; i++) {
+        knowledge[index][i][value - 1] = 0;
+    }
 }

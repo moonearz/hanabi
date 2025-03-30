@@ -94,7 +94,7 @@ void gameStartKnowledge(BOARD *board) {
 //  is also initialized
 //  drawer is the player who drew the card
 void updateKnowledgeDraw(BOARD *board, PLAYER *drawer, CARD drawn_card) {
-    int i, j;
+    int i, j, temp_int;
     CARD tmp;
     if(drawn_card.color == NO_CARD) {
         zeroKnowledge(drawer);
@@ -104,7 +104,10 @@ void updateKnowledgeDraw(BOARD *board, PLAYER *drawer, CARD drawn_card) {
         for(i = 0; i < NUM_PLAYERS; i++) {
             for(j = 0; j < HAND_SIZE; j++) {
                 //writing into old knowledge for the drawer's new card but it's getting reset anyways
-                (board->players[i].knowledge[j][drawn_card.color][drawn_card.value])--;
+                temp_int = (board->players[i].knowledge[j][drawn_card.color][drawn_card.value - 1])--;
+                if(temp_int < 0) {
+                    (board->players[i].knowledge[j][drawn_card.color][drawn_card.value - 1]) = 0;
+                }
             }
         }
         newKnowledge(drawer);

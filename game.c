@@ -16,6 +16,12 @@ int main() {
     //playCard(&myboard, &myboard.players[1], 1);
     //playCard(&myboard, &myboard.players[1], 1);
     //playCard(&myboard, &myboard.players[1], 1);
+
+    //I don't currently understand why it needs to be knowledge[0]
+    knownColor(&myboard.players[0].knowledge[0], 0, RED);
+    knownNotColor(&myboard.players[1].knowledge[0], 0, RED);
+    knownValue(&myboard.players[2].knowledge[0], 0, 4);
+    knownNotValue(&myboard.players[3].knowledge[0], 0, 4);
     printFullGameState(&myboard);
 
     return 0;

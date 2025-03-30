@@ -113,3 +113,7 @@ extern void printMove(const MOVE move, const PLAYER *player);
 extern void printCompactMove(const MOVE move);
 extern MOVE createMove(char type, int card_index, int player_index, char hint_t);
 extern void updateKnowledgeHint(BOARD *board, PLAYER *player, MOVE hint);
+extern void knownColor(int knowledge[][5 + RAINBOW_MODE][5], int index, enum COLOR color);
+extern void knownValue(int knowledge[][5 + RAINBOW_MODE][5], int index, int value);
+extern void knownNotColor(int knowledge[][5 + RAINBOW_MODE][5], int index, enum COLOR color);
+extern void knownNotValue(int knowledge[][5 + RAINBOW_MODE][5], int index, int value);
