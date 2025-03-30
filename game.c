@@ -10,41 +10,13 @@ int main() {
 
     BOARD myboard;
     initBoard(&myboard);
-    printf("the current score is: %i\n", getScore(&myboard));
-/* 
-    CARD testCards[4];
-    testCards[0].color = RED;
-    testCards[0].value = 1;
-    testCards[1].color = BLUE;
-    testCards[1].value = 3;
-    testCards[2].color = NO_CARD;
-    testCards[2].value = 2;
-    testCards[3].color = GREEN;
-    testCards[3].value = 6;
 
-    for(i = 0; i < 4; i++) {
-        printf("the card ");
-        printCard(testCards[i]);
-        printf(" is %s\n", playableCard(testCards[i], myboard.fireworks) ? "playable" : "not playable");
-    }
-
-    printKnowledge(&myboard.players[1]); */
-    //printCard(CARD('B',2));
-    printVisibleGameState(&myboard);
-    playCard(&myboard, &myboard.players[0], 2);
-    playCard(&myboard, &myboard.players[1], 1);
-    playCard(&myboard, &myboard.players[1], 1);
-    playCard(&myboard, &myboard.players[1], 1);
+    //printVisibleGameState(&myboard);
+    //playCard(&myboard, &myboard.players[0], 2);
+    //playCard(&myboard, &myboard.players[1], 1);
+    //playCard(&myboard, &myboard.players[1], 1);
+    //playCard(&myboard, &myboard.players[1], 1);
     printFullGameState(&myboard);
-
-    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
-    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
-    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
-    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
-    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
-    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
-    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
-    printMove(generateRandomMove(&myboard, &myboard.players[0]), &myboard.players[0]);
 
     return 0;
 }

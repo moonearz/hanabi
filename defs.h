@@ -72,15 +72,18 @@ typedef struct {
 extern void initBoard(BOARD *board);
 extern int getScore(BOARD *board);
 extern void initPlayers(BOARD *board);
-extern void fillKnowledge(BOARD *board);
+extern void updateKnowledgeDraw(BOARD *board, PLAYER *drawer, CARD drawn_card);
 extern void printVisibleGameState(const BOARD *board);
 extern void printFullGameState(const BOARD *board);
 extern void printPlayerKnowledge(const BOARD *board);
+extern void gameStartKnowledge(BOARD *board);
 //player.c
 extern void printHand(const PLAYER *player);
 extern void printKnowledge(const PLAYER *player);
 extern void initKnowledge(PLAYER *player);
 extern void newKnowledge(PLAYER *player);
+extern void zeroKnowledge(PLAYER *player);
+extern bool cardKnown(PLAYER *player, int index);
 //deck.c
 extern void printDeck(const DECK *deck);
 extern void printDiscard(const DECK *discard);
@@ -109,3 +112,4 @@ extern MOVE generateRandomMove(const BOARD *board, const PLAYER *player);
 extern void printMove(const MOVE move, const PLAYER *player);
 extern void printCompactMove(const MOVE move);
 extern MOVE createMove(char type, int card_index, int player_index, char hint_t);
+extern void updateKnowledgeHint(BOARD *board, PLAYER *player, MOVE hint);

@@ -66,4 +66,25 @@ void printKnowledge(const PLAYER *player) {
     }
 }
 
+//sets the knowledge of hand size - 1 to 0 in the case of no card
+void zeroKnowledge(PLAYER *player) {
+    int j,k,value;
+    for(j = 0; j < 5 + RAINBOW_MODE; j++) {
+        for(k = 0; k < 5; k++) {
+            player->knowledge[HAND_SIZE - 1][j][k] = 0;
+        }
+    }
+}
 
+//return true if there is only one (or zero) possible value of the card at index index
+bool cardKnown(PLAYER *player, int index) {
+    int i, j;
+    int num_candidates = 0;
+    for(i = 0; i < 5 + RAINBOW_MODE; i++) {
+        for(j = 0; j < 5; j++) {
+            if((player->knowledge[index][i][j]) > 0)
+                num_candidates++;
+        }
+    }
+    return (num_candidates < 2);
+}

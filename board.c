@@ -44,6 +44,7 @@ void initBoard(BOARD *board) {
     initFireworks(board->fireworks);
     shuffleDeck(&board->deck);
     deal(board);
+    gameStartKnowledge(board);
 }
 
 void initPlayers(BOARD *board) {
@@ -65,9 +66,71 @@ int getScore(BOARD *board) {
     return score;
 }
 
+//initialize knowledge after first cards have been dealt
+//only need to look at players' hands
+void gameStartKnowledge(BOARD *board) {
+    int i,j,k,l;
+    CARD tmp;
+    for(i = 0; i < NUM_PLAYERS; i++) { //adjusting knowledge of player i
+        for(l = 0; l < HAND_SIZE; l++) { //iterating through cards in player i's hand
+            for(j = 0; j < NUM_PLAYERS; j++) { //comparing cards to player j
+                if(j == i)
+                    continue;
+                for(k = 0; k < HAND_SIZE; k++) { //iterating through cards in player j's hand
+                    tmp = board->players[j].hand[k];
+                    (board->players[i].knowledge[l][tmp.color][tmp.value - 1])--;
+                }
+            }
+        }
+    }
+}
+
 //shifting is taken care of from the player side
 //this function should only reduce the possibilites based on new information
 //should not reset the knowledge arrays
-void fillKnowledge(BOARD *board) {
-
+//a player just discarded or played a card and drew a new one so:
+//  every other player compares their current knowledge with the new card drawn
+//  the current player learns what their card was (see discard pile) and updates their hand knowledge accordingly. Their new card's knowledge
+//  is also initialized
+//  drawer is the player who drew the card
+void updateKnowledgeDraw(BOARD *board, PLAYER *drawer, CARD drawn_card) {
+    int i, j;
+    CARD tmp;
+    if(drawn_card.color == NO_CARD) {
+        zeroKnowledge(drawer);
+    }
+    else {
+        //updating knowledge for other players based on drawn card
+        for(i = 0; i < NUM_PLAYERS; i++) {
+            for(j = 0; j < HAND_SIZE; j++) {
+                //writing into old knowledge for the drawer's new card but it's getting reset anyways
+                (board->players[i].knowledge[j][drawn_card.color][drawn_card.value])--;
+            }
+        }
+        newKnowledge(drawer);
+        //drawer compares their new card to every card that's visible to them
+        //places to check: discard pile, other player's hands, their own hands if they know what a card is
+        for(i = 0; i <  HAND_SIZE - 1; i++) {
+            //cards in hand
+            if(cardKnown(drawer, i)) {
+                tmp = drawer->hand[i];
+                (drawer->knowledge[HAND_SIZE - 1][tmp.color][tmp.value - 1])--;
+            }
+        }
+        //other players hands
+        for(i = 0; i < NUM_PLAYERS; i++) {
+            if(i == drawer->id)
+                continue;
+            for(j = 0; j < HAND_SIZE; j++) {
+                tmp = board->players[i].hand[j];
+                (drawer->knowledge[HAND_SIZE - 1][tmp.color][tmp.value - 1])--;
+            }
+        }
+        //discard pile
+        for(i = 0; i < board->discard_pile.index; i++) {
+            ASSERT((board->discard_pile.cards[i].color) != NO_CARD);
+            tmp = board->discard_pile.cards[i];
+            (drawer->knowledge[HAND_SIZE - 1][tmp.color][tmp.value - 1])--;
+        }
+    }
 }

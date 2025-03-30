@@ -148,3 +148,7 @@ void printMove(const MOVE move, const PLAYER *player) {
 void printCompactMove(const MOVE move) {
     char out[5];
 }
+
+void updateKnowledgeHint(BOARD *board, PLAYER *player, MOVE hint) {
+
+}
