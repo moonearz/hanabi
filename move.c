@@ -35,7 +35,7 @@ void drawCard(PLAYER *player, DECK *deck) {
         newKnowledge(player); //is this the right choice? they know what card it is
         return;
     }
-    player->hand[HAND_SIZE - 1] = pop(deck);
+    player->hand[HAND_SIZE - 1] = pop(deck);  
     newKnowledge(player);
 }
 
@@ -132,7 +132,7 @@ MOVE createMove(char type, int card_index, int player_index, char hint_t) {
     MOVE out;
     ASSERT(type == 'H' || type == 'P' || type == 'D'); //type of move is hint, play, or discard
     ASSERT(card_index > -1 && card_index < HAND_SIZE);
-    ASSERT(player_index > -1 && player_index < NUM_PLAYERS);
+    ASSERT(player_index > -1 && player_index < 7);
     ASSERT(hint_t == 'C' || hint_t == 'V' || hint_t == 'N'); //hint type is color, value, or no hint
     out.index_of_card = card_index;
     out.player_index = player_index;

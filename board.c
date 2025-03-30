@@ -45,6 +45,8 @@ void initBoard(BOARD *board) {
     shuffleDeck(&board->deck);
     deal(board);
     gameStartKnowledge(board);
+    board->countdown = NUM_PLAYERS;
+    board->deck_empty = false;
 }
 
 void initPlayers(BOARD *board) {
@@ -136,4 +138,33 @@ void updateKnowledgeDraw(BOARD *board, PLAYER *drawer, CARD drawn_card) {
             (drawer->knowledge[HAND_SIZE - 1][tmp.color][tmp.value - 1])--;
         }
     }
+}
+
+//controls the logic for actually moving the game forward when a move happens
+void makeMove(BOARD *board, MOVE move) {
+    int player_to_move = (board->move_counter) % NUM_PLAYERS;
+    PLAYER *player = &board->players[player_to_move];
+    //casework based on which type of move
+    if(move.move_type == PLAY) {
+        playCard(board, player, move.index_of_card);
+        //check if num fuses becomes 0 -> set game over to true if so
+        if(board->num_fuses == 0) {
+            board->game_over = true;
+        }
+    }
+    else if(move.move_type == DISCARD) {
+        discardCard(board, player, move.index_of_card);
+    }
+    else {
+        updateKnowledgeHint(&board->players[move.player_index], move);
+        (board->num_hints)--;
+    }
+    if(board->deck_empty)
+        (board->countdown)--;
+    else if(board->deck.index == (50 + 10 * RAINBOW_MODE))
+        board->deck_empty = true;
+    (board->move_counter)++;
+    //check if turns have elapsed and game is over
+    if(board->countdown == 0)
+        board->game_over = true;
 }
