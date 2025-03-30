@@ -26,10 +26,13 @@ exit(1);}
 
 #define CARD(a, b) (makeCard)((a), (b))
 #define MOVE(a, b, c, d) (createMove)((a), (b), (c), (d)) //for example MOVE('P', 1, 1, 'N') or MOVE('H', 2, 3, 'C')
+#define HINT(a, b, c) (createMove)('H', (a), (b), (c))
+#define PLAY(a) (createMove)('P', (a), (6), 'N')
+#define DISCARD(a) (createMove)('D', (a), (6), 'N')
 
 enum COLOR {RED = 0, BLUE = 1, YELLOW = 2, GREEN = 3, WHITE = 4, RAINBOW = 5, NO_CARD = 6, UNKNOWN = 7};
 enum MOVES {HINT = 1, PLAY = 2, DISCARD = 3};
-enum HINT_TYPE{COLOR = 1, NUMBER = 2, NOHINT = 3};
+enum HINT_TYPE{COLOR = 1, VALUE = 2, NOHINT = 3};
 
 typedef struct {
     enum MOVES move_type;
@@ -112,7 +115,7 @@ extern MOVE generateRandomMove(const BOARD *board, const PLAYER *player);
 extern void printMove(const MOVE move, const PLAYER *player);
 extern void printCompactMove(const MOVE move);
 extern MOVE createMove(char type, int card_index, int player_index, char hint_t);
-extern void updateKnowledgeHint(BOARD *board, PLAYER *player, MOVE hint);
+extern void updateKnowledgeHint(PLAYER *player, MOVE hint);
 extern void knownColor(int knowledge[][5 + RAINBOW_MODE][5], int index, enum COLOR color);
 extern void knownValue(int knowledge[][5 + RAINBOW_MODE][5], int index, int value);
 extern void knownNotColor(int knowledge[][5 + RAINBOW_MODE][5], int index, enum COLOR color);

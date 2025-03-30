@@ -18,11 +18,19 @@ int main() {
     //playCard(&myboard, &myboard.players[1], 1);
 
     //I don't currently understand why it needs to be knowledge[0]
-    knownColor(&myboard.players[0].knowledge[0], 0, RED);
-    knownNotColor(&myboard.players[1].knowledge[0], 0, RED);
-    knownValue(&myboard.players[2].knowledge[0], 0, 4);
-    knownNotValue(&myboard.players[3].knowledge[0], 0, 4);
-    printFullGameState(&myboard);
+    /* knownColor(&myboard.players[0].knowledge, 0, RED);
+    knownNotColor(&myboard.players[1].knowledge, 0, RED);
+    knownValue(&myboard.players[2].knowledge, 0, 4);
+    knownNotValue(&myboard.players[3].knowledge, 0, 4); */
+
+    MOVE test_move[10];
+    for(i = 0; i < 10; i++) {
+        test_move[i] = generateRandomMove(&myboard, &myboard.players[0]);
+        printMove(test_move[i], &myboard.players[0]);
+        printCompactMove(test_move[i]);
+    }
+
+    //printFullGameState(&myboard);
 
     return 0;
 }

@@ -122,7 +122,7 @@ MOVE generateRandomMove(const BOARD *board, const PLAYER *player) {
         int index_choice = rand() % HAND_SIZE;
         output.index_of_card = index_choice;
         output.hint_type = NOHINT;
-        output.player_index = -1;
+        output.player_index = 6; //6 as a nonsensical value for index that isn't used
     }
     
     return output;
@@ -130,6 +130,26 @@ MOVE generateRandomMove(const BOARD *board, const PLAYER *player) {
 
 MOVE createMove(char type, int card_index, int player_index, char hint_t) {
     MOVE out;
+    ASSERT(type == 'H' || type == 'P' || type == 'D'); //type of move is hint, play, or discard
+    ASSERT(card_index > -1 && card_index < HAND_SIZE);
+    ASSERT(player_index > -1 && player_index < NUM_PLAYERS);
+    ASSERT(hint_t == 'C' || hint_t == 'V' || hint_t == 'N'); //hint type is color, value, or no hint
+    out.index_of_card = card_index;
+    out.player_index = player_index;
+    switch(type) {
+        case 'H':
+            out.move_type = HINT;
+            out.hint_type = (hint_t == 'C') ? COLOR : VALUE;
+            break;
+        case 'P':
+            out.move_type = PLAY;
+            out.hint_type = NOHINT;
+            break;
+        default:
+            out.move_type = DISCARD;
+            out.hint_type = NOHINT;
+            break;
+    }
     return out;
 }
 
@@ -147,12 +167,57 @@ void printMove(const MOVE move, const PLAYER *player) {
 
 void printCompactMove(const MOVE move) {
     char out[5];
+    switch(move.move_type) {
+        case HINT:
+            out[0] = 'H';
+            out[2] = move.player_index + '0';
+            out[3] = (move.hint_type == COLOR) ? 'C' : 'V';
+            break;
+        case PLAY:
+            out[0] = 'P';
+            out[2] = '6';
+            out[3] = 'N';
+            break;
+        default:
+            out[0] = 'D';
+            out[2] = '6';
+            out[3] = 'N';
+            break;
+    }
+    out[1] = move.index_of_card + '0';
+    out[4] = '\0';
+    printf("%s\n", out);
 }
 
-//only internal knowledge needs to be updated, positive knowledge for hinted cards, negative knowledge for otehr cards
+//only internal knowledge needs to be updated, positive knowledge for hinted cards, negative knowledge for other cards
 //things get zeroed out kind of "unnaturally", will need to check (externally) that values don't become less than 0
-void updateKnowledgeHint(BOARD *board, PLAYER *player, MOVE hint) {
+void updateKnowledgeHint(PLAYER *player, MOVE hint) {
+    ASSERT(hint.hint_type != NOHINT);
+    int i;
     //starting with positive knowledge
+    if(hint.hint_type == COLOR) {
+        enum COLOR hinted_color = player->hand[hint.index_of_card].color;
+        for(i = 0; i  < HAND_SIZE; i++) { //apply the hint for all cards that have hinted color
+            if(player->hand[i].color == hinted_color) {
+                knownColor(player->knowledge, i, hinted_color);
+            }
+            else {
+                knownNotColor(player->knowledge, i, hinted_color);
+            }
+        }   
+    }
+    else {
+        int hinted_value = player->hand[hint.index_of_card].value;
+         for(i = 0; i  < HAND_SIZE; i++) { //apply the hint for all cards that have hinted color
+            if(player->hand[i].value == hinted_value) {
+                knownValue(player->knowledge, i, hinted_value);
+            }
+            else {
+                knownNotValue(player->knowledge, i, hinted_value);
+            }
+        }
+
+    }
 }
 
 void knownColor(int knowledge[][5 + RAINBOW_MODE][5], int index, enum COLOR color) {
