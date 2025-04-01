@@ -11,26 +11,26 @@ int main() {
     BOARD myboard;
     initBoard(&myboard);
 
-    //printVisibleGameState(&myboard);
-    //playCard(&myboard, &myboard.players[0], 2);
-    //playCard(&myboard, &myboard.players[1], 1);
-    //playCard(&myboard, &myboard.players[1], 1);
-    //playCard(&myboard, &myboard.players[1], 1);
-
-    //I don't currently understand why it needs to be knowledge[0]
-    /* knownColor(&myboard.players[0].knowledge, 0, RED);
-    knownNotColor(&myboard.players[1].knowledge, 0, RED);
-    knownValue(&myboard.players[2].knowledge, 0, 4);
-    knownNotValue(&myboard.players[3].knowledge, 0, 4); */
-
-    MOVE test_move[10];
+  /*   MOVE test_move[10];
     for(i = 0; i < 10; i++) {
         test_move[i] = generateRandomMove(&myboard, &myboard.players[0]);
         printMove(test_move[i], &myboard.players[0]);
         printCompactMove(test_move[i]);
-    }
-
-    //printFullGameState(&myboard);
+    } */
+    MOVE hint = HINT(0, 0, 'V'); //card index, player index, char type
+    MOVE hint2 = HINT(0, 0, 'C');
+    MOVE hint3 = HINT(1, 0, 'C');
+    MOVE hint4 = HINT(2, 0, 'C');
+    MOVE hint6 = HINT(2, 0, 'V');
+    MOVE hint5 = HINT(3, 0, 'C');
+    PLAYER *hinted = &myboard.players[0];
+    updateKnowledgeHint(hinted, hint);
+    updateKnowledgeHint(hinted, hint2);
+    updateKnowledgeHint(hinted, hint3);
+    updateKnowledgeHint(hinted, hint4);
+    updateKnowledgeHint(hinted, hint5);
+    updateKnowledgeHint(hinted, hint6);
+    printFullGameState(&myboard);
 
     return 0;
 }

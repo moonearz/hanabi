@@ -24,11 +24,11 @@ exit(1);}
 #define MAX_HINTS 8
 #define RAINBOW_MODE false
 
-#define CARD(a, b) (makeCard)((a), (b))
+#define CARD(a, b) (makeCard)((a), (b)) //char color, int value
 #define MOVE(a, b, c, d) (createMove)((a), (b), (c), (d)) //for example MOVE('P', 1, 1, 'N') or MOVE('H', 2, 3, 'C')
-#define HINT(a, b, c) (createMove)('H', (a), (b), (c))
-#define PLAY(a) (createMove)('P', (a), (6), 'N')
-#define DISCARD(a) (createMove)('D', (a), (6), 'N')
+#define HINT(a, b, c) (createMove)('H', (a), (b), (c)) //int card index, int player index, char color/value
+#define PLAY(a) (createMove)('P', (a), (6), 'N') //int card index
+#define DISCARD(a) (createMove)('D', (a), (6), 'N') //same as above
 
 enum COLOR {RED = 0, BLUE = 1, YELLOW = 2, GREEN = 3, WHITE = 4, RAINBOW = 5, NO_CARD = 6, UNKNOWN = 7};
 enum MOVES {HINT = 1, PLAY = 2, DISCARD = 3};

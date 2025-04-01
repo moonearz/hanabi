@@ -141,6 +141,7 @@ void updateKnowledgeDraw(BOARD *board, PLAYER *drawer, CARD drawn_card) {
 }
 
 //controls the logic for actually moving the game forward when a move happens
+//maybe need to know the player a priori? For generating a legal move?
 void makeMove(BOARD *board, MOVE move) {
     int player_to_move = (board->move_counter) % NUM_PLAYERS;
     PLAYER *player = &board->players[player_to_move];
