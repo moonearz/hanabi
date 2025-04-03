@@ -82,7 +82,7 @@ extern void printVisibleGameState(const BOARD *board);
 extern void printFullGameState(const BOARD *board);
 extern void printPlayerKnowledge(const BOARD *board);
 extern void gameStartKnowledge(BOARD *board);
-extern void makeMove(BOARD *board, MOVE move);
+extern void makeMove(BOARD *board, PLAYER *player, MOVE move);
 //player.c
 extern void printHand(const PLAYER *player);
 extern void printKnowledge(const PLAYER *player);

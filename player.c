@@ -52,7 +52,7 @@ void newKnowledge(PLAYER *player) {
 void printKnowledge(const PLAYER *player) {
     int i,j, k;
     char colors[6][8] = {"RED", "BLUE", "YELLOW", "GREEN", "WHITE", "RAINBOW"};
-    printf("Player %i could possibly have in their hand:\n", player->id);
+    printf("Player %i could possibly have in their hand:\n", player->id + 1);
     for(i = 0; i < HAND_SIZE; i++) {
         printf("for card index %i:\n", i);
         printf("          1 2 3 4 5\n");

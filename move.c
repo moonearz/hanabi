@@ -62,14 +62,6 @@ void playCard(BOARD *board, PLAYER *player, int index) {
     }
 }
 
-//TODO
-//check id hinted is not the hint giver-- does this require knowing the hint giver? -> implicit in whose turn it is, player already decided
-//color hint is true if hinting color, false if hinting number
-//this should be made after thinking about knowledge a bit
-void giveHint(BOARD *board, int id_hinted, int card_index, bool color_hint) {
-
-}
-
 bool canHint(const BOARD *board) {
     return (board->num_hints > 0);
 }

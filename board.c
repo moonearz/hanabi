@@ -21,7 +21,7 @@ void printFullGameState(const BOARD *board) {
     printPlayerKnowledge(board);
     printf("Here is the state of the deck: \n");
     printDeck(&board->deck);
-    printf("The move number is now: %i\n", board->move_counter);
+    printf("The move number is now: %i\n", board->move_counter + 1);
 }
 
 void printPlayerKnowledge(const BOARD *board) {
@@ -142,9 +142,7 @@ void updateKnowledgeDraw(BOARD *board, PLAYER *drawer, CARD drawn_card) {
 
 //controls the logic for actually moving the game forward when a move happens
 //maybe need to know the player a priori? For generating a legal move?
-void makeMove(BOARD *board, MOVE move) {
-    int player_to_move = (board->move_counter) % NUM_PLAYERS;
-    PLAYER *player = &board->players[player_to_move];
+void makeMove(BOARD *board, PLAYER *player, MOVE move) {
     //casework based on which type of move
     if(move.move_type == PLAY) {
         playCard(board, player, move.index_of_card);
