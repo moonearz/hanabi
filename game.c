@@ -4,6 +4,7 @@
 #include "defs.h"
 
 int main() {
+    srand(142); //seed for debuggging, remove this later
     int i;
     /* printf("The number of players in this game is: %i\n", NUM_PLAYERS);
     printf("Rainbow mode is %s\n", RAINBOW_MODE ? "on" : "off"); */
@@ -42,8 +43,9 @@ int main() {
         random_move = generateRandomMove(&myboard, player_to_move);
         printMove(random_move, player_to_move);
         makeMove(&myboard, player_to_move, random_move);
-        printFullGameState(&myboard);
+        //printFullGameState(&myboard);
     }
+    printf("The score of the game was %i", getScore(&myboard));
 
     fclose(stdout);
 

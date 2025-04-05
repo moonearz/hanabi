@@ -50,7 +50,6 @@ void initDeck(DECK *deck) {
 
 void shuffleDeck(DECK *deck) //implements Fisher-Yates shuffling
 {
-    srand(142857); //seed for debuggging, remove this later
     int i,j;
     CARD temp;
     for(i = deck->index; i < 49 + 10 * RAINBOW_MODE; i++) {
