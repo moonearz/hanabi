@@ -23,6 +23,7 @@ exit(1);}
 #define MAX_FUSES 3
 #define MAX_HINTS 8
 #define RAINBOW_MODE false
+#define MAX_SCORE (5 + RAINBOW_MODE) * 5
 
 #define CARD(a, b) (makeCard)((a), (b)) //char color, int value
 #define MOVE(a, b, c, d) (createMove)((a), (b), (c), (d)) //for example MOVE('P', 1, 1, 'N') or MOVE('H', 2, 3, 'C')

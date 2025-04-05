@@ -189,4 +189,6 @@ void makeMove(BOARD *board, PLAYER *player, MOVE move) {
     //check if turns have elapsed and game is over
     if(board->countdown == 0)
         board->game_over = true;
+    if(getScore(board) == MAX_SCORE)
+        board->game_over = true;
 }
