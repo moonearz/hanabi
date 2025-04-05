@@ -22,6 +22,13 @@ void printDiscard(const DECK *discard) {
     printf("\n");
 }
 
+void printDiscardString(const DECK *discard) {
+    int i;
+    for(i = 0; i < discard->index; i++) {
+        printCard(discard->cards[i]);
+    }
+}
+
 void initDeck(DECK *deck) {
     int i,j;
     for(i = 0; i < 10 + RAINBOW_MODE; i++) {
@@ -122,5 +129,19 @@ void printFireworks(const bool fireworks[][5]) {
             }
         }
         printf("\n");
+    }
+}
+
+void printPlayedCardsString(const bool fireworks[][5]) {
+    int i,j;
+    CARD tmp;
+    for(j = 4; j > -1; j--) {
+        for(i = 0; i < 5 + RAINBOW_MODE; i++) {
+            if(fireworks[i][j]) {
+                tmp.color = (enum COLOR)i;
+                tmp.value = j + 1;
+                printCard(tmp);
+            }
+        }
     }
 }

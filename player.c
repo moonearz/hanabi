@@ -9,6 +9,13 @@ void printHand(const PLAYER *player) {
     printf("\n");
 }
 
+void printHandString(const PLAYER *player) {
+    int i;
+    for(i = 0; i < HAND_SIZE; i++) {
+        printCard(player->hand[i]);
+    }
+}
+
 void initKnowledge(PLAYER *player) {
     int i,j,k,value;
 
@@ -62,6 +69,17 @@ void printKnowledge(const PLAYER *player) {
                 printf("%i ", player->knowledge[i][j][k]);
             }
             printf("\n");
+        }
+    }
+}
+
+void printKnowledgeString(const PLAYER *player) {
+    int i,j,k;
+    for(i = 0; i < HAND_SIZE; i++) {
+        for(j = 0; j < 5 + RAINBOW_MODE; j++) {
+            for(k = 0; k < 5; k++) {
+                printf("%i", player->knowledge[i][j][k]);
+            }
         }
     }
 }

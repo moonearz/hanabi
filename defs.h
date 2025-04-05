@@ -83,6 +83,7 @@ extern void printFullGameState(const BOARD *board);
 extern void printPlayerKnowledge(const BOARD *board);
 extern void gameStartKnowledge(BOARD *board);
 extern void makeMove(BOARD *board, PLAYER *player, MOVE move);
+extern void printStateString(const BOARD *board, const PLAYER *player_to_move);
 //player.c
 extern void printHand(const PLAYER *player);
 extern void printKnowledge(const PLAYER *player);
@@ -90,9 +91,12 @@ extern void initKnowledge(PLAYER *player);
 extern void newKnowledge(PLAYER *player);
 extern void zeroKnowledge(PLAYER *player);
 extern bool cardKnown(PLAYER *player, int index);
+extern void printKnowledgeString(const PLAYER *player);
+extern void printHandString(const PLAYER *player);
 //deck.c
 extern void printDeck(const DECK *deck);
 extern void printDiscard(const DECK *discard);
+extern void printDiscardString(const DECK *discard);
 extern void initDeck(DECK *deck);
 extern void initDiscard(BOARD *board);
 extern void pushDiscard(DECK *discard, CARD card);
@@ -101,6 +105,7 @@ extern CARD pop(DECK *deck);
 extern void deal(BOARD *board);
 extern void initFireworks(bool fireworks[][5]);
 extern void printFireworks(const bool fireworks[][5]);
+extern void printPlayedCardsString(const bool fireworks[][5]);
 //card.c
 extern void printCard(const CARD card);
 extern bool validCard(const CARD card);

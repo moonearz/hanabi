@@ -24,6 +24,29 @@ void printFullGameState(const BOARD *board) {
     printf("The move number is now: %i\n", board->move_counter + 1);
 }
 
+//this occurs before a move, represents the board to a player who is about to move
+//in no particular order, hands, tokens, discard pile, played cards, game knowledge
+void printStateString(const BOARD *board, const PLAYER *player_to_move) {
+    int i,j;
+    printf("%i|", board->num_fuses);
+    printf("%i|", board->num_hints);
+    printDiscardString(&board->discard_pile);
+    printf("|");
+    printPlayedCardsString(board->fireworks);
+    printf("|");
+    for(i = 0; i < NUM_PLAYERS; i++) {
+        printKnowledgeString(&board->players[i]);
+        printf("|");
+    }
+    for(i = 0; i < NUM_PLAYERS; i++) {
+        if(i != player_to_move->id) {
+            printHandString(&board->players[i]);
+            printf("|");
+        }
+    }
+    printf("\n");
+}
+
 void printPlayerKnowledge(const BOARD *board) {
     int i;
     for(int i = 0; i < NUM_PLAYERS; i++) {
