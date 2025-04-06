@@ -33,7 +33,7 @@ void drawCard(PLAYER *player, DECK *deck) {
     if(deck->index == (50 + 10 * RAINBOW_MODE)) {
         CARD empty = makeCard('N', 0);
         player->hand[HAND_SIZE - 1] = empty;
-        newKnowledge(player); //is this the right choice? they know what card it is
+        zeroKnowledge(player);
         return;
     }
     player->hand[HAND_SIZE - 1] = pop(deck);  

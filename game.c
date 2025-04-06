@@ -18,15 +18,17 @@ int main() {
 
     //TODO: drawing card needs to update players knowledge of their new card based on hands and discard pile
     //Trying out a full game
+    //DRAW KNOWLEDGE NEEDS TO BE TESTED
+    //we can test by going the other way, starting with zeros and adding cards back in from the deck (plus player's hand)
     while(game_counter < 15) {
         initBoard(&myboard);
         while(!(myboard.game_over)) {
             player_to_move = &myboard.players[myboard.move_counter % NUM_PLAYERS];
             printStateString(&myboard, player_to_move);
             random_move = generateRandomMove(&myboard, player_to_move);
-            //printMove(random_move, player_to_move);
+            printMove(random_move, player_to_move);
             makeMove(&myboard, player_to_move, random_move);
-            //printFullGameState(&myboard);
+            printFullGameState(&myboard);
         }
         printf("The score of the game was %i\n", getScore(&myboard));
         game_counter++;

@@ -169,6 +169,7 @@ void makeMove(BOARD *board, PLAYER *player, MOVE move) {
     //casework based on which type of move
     if(move.move_type == PLAY) {
         playCard(board, player, move.index_of_card);
+        drawKnowledge(player, board);
         //check if num fuses becomes 0 -> set game over to true if so
         if(board->num_fuses == 0) {
             board->game_over = true;
@@ -176,6 +177,7 @@ void makeMove(BOARD *board, PLAYER *player, MOVE move) {
     }
     else if(move.move_type == DISCARD) {
         discardCard(board, player, move.index_of_card);
+        drawKnowledge(player, board);
     }
     else {
         updateKnowledgeHint(&board->players[move.player_index], move);

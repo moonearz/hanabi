@@ -94,6 +94,7 @@ extern void zeroKnowledge(PLAYER *player);
 extern bool cardKnown(PLAYER *player, int index);
 extern void printKnowledgeString(const PLAYER *player);
 extern void printHandString(const PLAYER *player);
+extern void drawKnowledge(PLAYER *player, BOARD *board);
 //deck.c
 extern void printDeck(const DECK *deck);
 extern void printDiscard(const DECK *discard);

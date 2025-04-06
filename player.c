@@ -37,7 +37,7 @@ void initKnowledge(PLAYER *player) {
     }
 }
 
-//initializes no knowledges in index hand size - 1 for a draw
+//initializes no knowledge in index hand size - 1 for a draw
 void newKnowledge(PLAYER *player) {
     int j,k,value;
     for(j = 0; j < 5 + RAINBOW_MODE; j++) {
@@ -53,6 +53,28 @@ void newKnowledge(PLAYER *player) {
                 }
                 player->knowledge[HAND_SIZE - 1][j][k] = value;
         }
+    }
+}
+
+//initializes the knowledge for a new draw based on the visible cards
+void drawKnowledge(PLAYER *player, BOARD *board) {
+    //do nothing if the card is not a card
+    if(player->hand[HAND_SIZE - 1].color == NO_CARD)
+        return;
+    //need to iterate through hands, discard pile, board
+    //actually, because of the way the deck is structured maybe I can just go through all the "seen" cards
+    //double counts because the players hand is included in that
+    //solution: add back cards in the players hand
+    int i, j;
+    int current_index = board->deck.index;
+    CARD tmp;
+    for(i = 0; i < current_index; i++) {
+        tmp = board->deck.cards[i];
+        (player->knowledge[HAND_SIZE - 1][tmp.color][tmp.value - 1])--;
+    }
+    for(j = 0; j < HAND_SIZE; j++) {
+        tmp = player->hand[j];
+        (player->knowledge[HAND_SIZE - 1][tmp.color][tmp.value - 1])++;
     }
 }
 
