@@ -194,3 +194,10 @@ void makeMove(BOARD *board, PLAYER *player, MOVE move) {
     if(getScore(board) == MAX_SCORE)
         board->game_over = true;
 }
+
+bool isLegalMove(MOVE move, BOARD *board) {
+    if(move.move_type == HINT) {
+        return move.player_index != (board->move_counter % NUM_PLAYERS);
+    }
+    return true;
+}

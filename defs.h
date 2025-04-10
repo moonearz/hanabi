@@ -85,6 +85,7 @@ extern void printPlayerKnowledge(const BOARD *board);
 extern void gameStartKnowledge(BOARD *board);
 extern void makeMove(BOARD *board, PLAYER *player, MOVE move);
 extern void printStateString(const BOARD *board, const PLAYER *player_to_move);
+extern bool isLegalMove(MOVE move, BOARD *board);
 //player.c
 extern void printHand(const PLAYER *player);
 extern void printKnowledge(const PLAYER *player);
@@ -114,7 +115,6 @@ extern bool validCard(const CARD card);
 extern CARD makeCard(char color, int value);
 extern bool playableCard(const CARD card, const bool fireworks[][5]);
 //move.c
-extern bool isLegalMove(const MOVE* move);
 extern void discardCard(BOARD *board, PLAYER *player, int index);
 extern void shiftHand(PLAYER *player, int index);
 extern void drawCard(PLAYER *player, DECK *deck);

@@ -1,10 +1,5 @@
 #include "defs.h"
 
-//TODO
-bool isLegalMove(const MOVE* move) {
-    return true;
-}
-
 //index is index of card to discard, also draws
 void discardCard(BOARD *board, PLAYER *player, int index) {
     pushDiscard(&board->discard_pile, player->hand[index]);
