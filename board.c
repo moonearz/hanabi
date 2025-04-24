@@ -41,6 +41,8 @@ void printStateString(const BOARD *board, const PLAYER *player_to_move) {
     for(i = 0; i < NUM_PLAYERS; i++) {
         if(i != player_to_move->id) {
             printHandString(&board->players[i]);
+        }
+        if(i < NUM_PLAYERS - 1) {
             printf("|");
         }
     }
