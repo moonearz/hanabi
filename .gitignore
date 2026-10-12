@@ -1,8 +1,34 @@
+# compiled stuff
 *.exe
-*.txt
-/.vscode
-/hanabi.dSYM
 *.out
 *.o
-hanabi
-/venv
+*.a
+*.so
+*.dylib
+/hanabi
+
+# build
+/build/
+/bin/
+
+# debugging
+*.dSYM/
+
+# python
+/venv/
+/.venv/
+__pycache__/
+*.py[cod]
+
+# mac
+.DS_Store
+
+# editor(s)
+.vscode/*
+!.vscode/settings.json
+*.swp
+*.swo
+*~
+testcode.txt
+thoughts.txt
+game_output.txt

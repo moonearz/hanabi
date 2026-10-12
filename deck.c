@@ -2,9 +2,9 @@
 
 void printDeck(const DECK *deck) {
     int i, j;
-    for(i = 0; i < 5 + RAINBOW_MODE; i++) {
-        for(j = 0; j < 10; j++) {
-            if(10 * i + j >= (deck->index)) {
+    for (i = 0; i < 5 + RAINBOW_MODE; i++) {
+        for (j = 0; j < 10; j++) {
+            if (10 * i + j >= (deck->index)) {
                 printCard(deck->cards[10 * i + j]);
                 printf(" ");
             }
@@ -15,7 +15,7 @@ void printDeck(const DECK *deck) {
 
 void printDiscard(const DECK *discard) {
     int i;
-    for(i = 0; i < discard->index; i++) {
+    for (i = 0; i < discard->index; i++) {
         printCard(discard->cards[i]);
         printf(" ");
     }
@@ -24,30 +24,26 @@ void printDiscard(const DECK *discard) {
 
 void printDiscardString(const DECK *discard) {
     int i;
-    for(i = 0; i < discard->index; i++) {
+    for (i = 0; i < discard->index; i++) {
         printCard(discard->cards[i]);
     }
 }
 
 void initDeck(DECK *deck) {
-    int i,j;
-    for(i = 0; i < 10 + RAINBOW_MODE; i++) {
+    int i, j;
+    for (i = 0; i < 10 + RAINBOW_MODE; i++) {
         enum COLOR current = i;
-        for(j = 0; j < 10; j++) {
+        for (j = 0; j < 10; j++) {
             deck->cards[10 * i + j].color = current;
-            if(j < 3) {
+            if (j < 3) {
                 deck->cards[10 * i + j].value = 1;
-            }
-            else if(j < 5) {
+            } else if (j < 5) {
                 deck->cards[10 * i + j].value = 2;
-            }
-            else if(j < 7) {
+            } else if (j < 7) {
                 deck->cards[10 * i + j].value = 3;
-            }
-            else if(j < 9) {
+            } else if (j < 9) {
                 deck->cards[10 * i + j].value = 4;
-            }
-            else {
+            } else {
                 deck->cards[10 * i + j].value = 5;
             }
         }
@@ -55,11 +51,11 @@ void initDeck(DECK *deck) {
     deck->index = 0;
 }
 
-void shuffleDeck(DECK *deck) //implements Fisher-Yates shuffling
+void shuffleDeck(DECK *deck) // implements Fisher-Yates shuffling
 {
-    int i,j;
+    int i, j;
     CARD temp;
-    for(i = deck->index; i < 49 + 10 * RAINBOW_MODE; i++) {
+    for (i = deck->index; i < 49 + 10 * RAINBOW_MODE; i++) {
         j = (rand() % (49 + 10 * RAINBOW_MODE - i)) + i;
         temp.color = deck->cards[i].color;
         temp.value = deck->cards[i].value;
@@ -78,11 +74,12 @@ CARD pop(DECK *deck) {
     return top;
 }
 
-void deal(BOARD *board) //deal 4 cards to every player -- MOST RECENTLY DEALT CARD GOES TO INDEX 3
+void deal(BOARD *board) // deal 4 cards to every player -- MOST RECENTLY DEALT
+                        // CARD GOES TO INDEX 3
 {
-    int i,j;
-    for(i = 0; i < HAND_SIZE; i++) {
-        for(j = 0; j < NUM_PLAYERS; j++) {
+    int i, j;
+    for (i = 0; i < HAND_SIZE; i++) {
+        for (j = 0; j < NUM_PLAYERS; j++) {
             board->players[j].hand[i] = pop(&board->deck);
             (board->num_cards)--;
         }
@@ -92,7 +89,7 @@ void deal(BOARD *board) //deal 4 cards to every player -- MOST RECENTLY DEALT CA
 void initDiscard(BOARD *board) {
     int i;
     board->discard_pile.index = 0;
-    for(i = 0; i < 50 + 10 * RAINBOW_MODE; i++) {
+    for (i = 0; i < 50 + 10 * RAINBOW_MODE; i++) {
         board->discard_pile.cards[i].color = NO_CARD;
         board->discard_pile.cards[i].value = -1;
     }
@@ -105,26 +102,25 @@ void pushDiscard(DECK *discard, CARD card) {
 }
 
 void initFireworks(bool fireworks[][5]) {
-    int i,j;
-    for(i = 0; i < 5 + RAINBOW_MODE; i++) {
-        for(j = 0; j < 5; j++) {
+    int i, j;
+    for (i = 0; i < 5 + RAINBOW_MODE; i++) {
+        for (j = 0; j < 5; j++) {
             fireworks[i][j] = false;
         }
     }
 }
 
 void printFireworks(const bool fireworks[][5]) {
-    int i,j;
+    int i, j;
     CARD tmp;
-    for(j = 4; j > -1; j--) {
-        for(i = 0; i < 5 + RAINBOW_MODE; i++) {
-            if(fireworks[i][j]) {
+    for (j = 4; j > -1; j--) {
+        for (i = 0; i < 5 + RAINBOW_MODE; i++) {
+            if (fireworks[i][j]) {
                 tmp.color = (enum COLOR)i;
                 tmp.value = j + 1;
                 printCard(tmp);
                 printf(" ");
-            }
-            else {
+            } else {
                 printf("   ");
             }
         }
@@ -133,11 +129,11 @@ void printFireworks(const bool fireworks[][5]) {
 }
 
 void printPlayedCardsString(const bool fireworks[][5]) {
-    int i,j;
+    int i, j;
     CARD tmp;
-    for(j = 4; j > -1; j--) {
-        for(i = 0; i < 5 + RAINBOW_MODE; i++) {
-            if(fireworks[i][j]) {
+    for (j = 4; j > -1; j--) {
+        for (i = 0; i < 5 + RAINBOW_MODE; i++) {
+            if (fireworks[i][j]) {
                 tmp.color = (enum COLOR)i;
                 tmp.value = j + 1;
                 printCard(tmp);
